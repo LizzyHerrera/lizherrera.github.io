@@ -5,714 +5,658 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Liz Herrera — Character Technical Artist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --bg2: #0f0f18;
-    --surface: #13131e;
-    --border: #1e1e2e;
-    --accent: #4a90d9;
-    --accent2: #7eb8f7;
-    --accent-dim: rgba(74,144,217,0.12);
-    --accent-glow: rgba(74,144,217,0.25);
-    --text: #e8e8f0;
-    --text-dim: #7a7a9a;
-    --text-mid: #b0b0c8;
-    --mono: 'Space Mono', monospace;
-    --display: 'Syne', sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--display);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  /* NOISE OVERLAY */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 3rem;
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-logo {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--text-dim);
-    text-decoration: none;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--accent2); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 3rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(74,144,217,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(74,144,217,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 20%, transparent 100%);
-  }
-
-  .hero-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,144,217,0.08) 0%, transparent 70%);
-    top: 50%; left: 60%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .hero-tag {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.6s 0.1s forwards;
-  }
-
-  .hero h1 {
-    font-size: clamp(3.5rem, 9vw, 8rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.2s forwards;
-  }
-
-  .hero h1 span {
-    color: var(--accent);
-    display: block;
-  }
-
-  .hero-subtitle {
-    font-size: clamp(1rem, 2vw, 1.3rem);
-    color: var(--text-mid);
-    font-weight: 400;
-    margin: 1.5rem 0 2.5rem;
-    max-width: 560px;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.35s forwards;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s 0.5s forwards;
-  }
-
-  .btn {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.6rem;
-    border-radius: 2px;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-    border: 1px solid var(--accent);
-  }
-  .btn-primary:hover {
-    background: var(--accent2);
-    border-color: var(--accent2);
-    box-shadow: 0 0 24px var(--accent-glow);
-  }
-
-  .btn-ghost {
-    background: transparent;
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-  }
-  .btn-ghost:hover {
-    border-color: var(--accent);
-    color: var(--accent2);
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-    opacity: 0;
-    animation: fadeUp 0.7s 0.65s forwards;
-  }
-
-  .stat-num {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--accent);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.3rem;
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 7rem 3rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-    margin-bottom: 3.5rem;
-  }
-
-  .section-tag {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .section-title {
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    color: var(--text);
-  }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-    max-width: 200px;
-  }
-
-  /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-    max-width: 1100px;
-  }
-
-  .about-text {
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-  }
-
-  .about-text p + p { margin-top: 1.2rem; }
-
-  .about-text strong { color: var(--text); font-weight: 600; }
-
-  .about-skills {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .skill-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .skill-label {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .tag {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 2px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text-mid);
-    letter-spacing: 0.05em;
-    transition: all 0.15s;
-  }
-
-  .tag:hover {
-    border-color: var(--accent);
-    color: var(--accent2);
-    background: var(--accent-dim);
-  }
-
-  /* PROJECTS */
-  #projects { background: var(--bg2); }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    gap: 1.5px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    max-width: 1200px;
-  }
-
-  .project-card {
-    background: var(--bg2);
-    padding: 2.5rem;
-    transition: background 0.2s;
-    cursor: default;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 0;
-    background: var(--accent);
-    transition: height 0.3s ease;
-  }
-
-  .project-card:hover { background: var(--surface); }
-  .project-card:hover::before { height: 100%; }
-
-  .project-num {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    margin-bottom: 1rem;
-  }
-
-  .project-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.8rem;
-    letter-spacing: -0.01em;
-  }
-
-  .project-desc {
-    font-size: 0.88rem;
-    color: var(--text-dim);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-highlights {
-    list-style: none;
-    margin-bottom: 1.5rem;
-  }
-
-  .project-highlights li {
-    font-size: 0.82rem;
-    color: var(--text-mid);
-    padding: 0.3rem 0;
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.5;
-  }
-
-  .project-highlights li::before {
-    content: '○';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.6rem;
-    top: 0.45rem;
-  }
-
-  .project-stack {
-    font-family: var(--mono);
-    font-size: 0.62rem;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-    border-top: 1px solid var(--border);
-    padding-top: 1rem;
-    line-height: 1.6;
-  }
-
-  .project-stack span { color: var(--accent); }
-
-  /* MEDIA PLACEHOLDER */
-  .project-media {
-    margin-bottom: 1.5rem;
-    background: var(--bg);
-    border: 1px dashed var(--border);
-    border-radius: 2px;
-    aspect-ratio: 16/9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: var(--text-dim);
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: border-color 0.2s;
-  }
-
-  .project-media:hover { border-color: var(--accent); }
-
-  .media-icon {
-    font-size: 1.5rem;
-    opacity: 0.3;
-  }
-
-  /* EXPERIENCE */
-  .experience-list {
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .exp-item {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 2rem;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
-
-  .exp-item:first-child { border-top: 1px solid var(--border); }
-
-  .exp-left {}
-
-  .exp-dates {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-  }
-
-  .exp-company {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-dim);
-  }
-
-  .exp-right {}
-
-  .exp-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 0.8rem;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.85rem;
-    color: var(--text-mid);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.6;
-  }
-
-  .exp-bullets li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.7rem;
-  }
-
-  /* PERSONAL PROJECT */
-  .personal-card {
-    max-width: 900px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    padding: 2rem 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-  }
-
-  /* CONTACT */
-  #contact { background: var(--bg2); }
-
-  .contact-inner {
-    max-width: 700px;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .contact-inner h2 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    margin-bottom: 1rem;
-  }
-
-  .contact-inner p {
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    margin-bottom: 2.5rem;
-    line-height: 1.7;
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p {
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    section { padding: 5rem 1.5rem; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-    .hero-stats { gap: 2rem; flex-wrap: wrap; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .personal-card { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-  }
+:root {
+  --bg:        #0c0c0e;
+  --bg-raised: #111114;
+  --surface:   #16161a;
+  --border:    rgba(255,255,255,0.07);
+  --border-hi: rgba(255,255,255,0.14);
+  --accent:    #c8a96e;
+  --accent2:   #e8c98e;
+  --accent-dim:rgba(200,169,110,0.1);
+  --text:      #f0f0ee;
+  --text-mid:  #9a9a96;
+  --text-dim:  #55554f;
+  --mono:      'DM Mono', monospace;
+  --sans:      'DM Sans', sans-serif;
+  --display:   'Bebas Neue', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px,
+    rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  height: 56px;
+  background: rgba(12,12,14,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-watermark {
+  position: absolute;
+  right: -0.05em;
+  top: 50%;
+  transform: translateY(-52%);
+  font-family: var(--display);
+  font-size: clamp(260px, 36vw, 540px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 56px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.1s ease forwards;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(5rem, 13vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s ease forwards;
+}
+
+.hero h1 em { font-style: normal; color: var(--accent); }
+
+.hero-role {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-mid);
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.32s ease forwards;
+}
+.hero-role strong { color: var(--text); font-weight: 500; }
+
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.44s ease forwards;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.5rem;
+  text-decoration: none;
+  transition: all 0.18s;
+  border-radius: 1px;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #0c0c0e;
+  border: 1px solid var(--accent);
+  font-weight: 500;
+}
+.btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border-hi);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.hero-tagline {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 1.8rem;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.55s ease forwards;
+}
+
+.hero-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 60%);
+  opacity: 0.3;
+}
+
+/* SECTIONS */
+section { padding: 7rem 3rem; position: relative; z-index: 1; }
+
+.sec-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 3.5rem;
+}
+
+/* ABOUT */
+#about { background: var(--bg-raised); }
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 1100px;
+}
+
+.about-body {
+  font-size: 0.98rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  font-weight: 300;
+}
+.about-body p + p { margin-top: 1.1rem; }
+.about-body strong { color: var(--text); font-weight: 500; }
+
+.skills-block { display: flex; flex-direction: column; gap: 1.6rem; }
+
+.skill-group-label {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  padding: 0.28rem 0.65rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  letter-spacing: 0.04em;
+  transition: all 0.15s;
+  border-radius: 1px;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-dim); }
+
+/* PROJECTS */
+#projects { background: var(--bg); }
+
+.projects-list { display: flex; flex-direction: column; gap: 2px; max-width: 1100px; }
+
+.proj {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: 260px;
+  transition: border-color 0.2s;
+  overflow: hidden;
+}
+.proj:hover { border-color: var(--border-hi); }
+
+.proj-media {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.proj-media::before, .proj-media::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.35;
+}
+.proj-media::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.proj-media::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+.proj-media img, .proj-media video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.media-icon { font-size: 2rem; opacity: 0.12; margin-bottom: 0.3rem; }
+
+.proj-body {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.proj-num {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.proj-title {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+  line-height: 1.1;
+}
+
+.proj-desc {
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+}
+
+.proj-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1.4rem; }
+.proj-bullets li {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  padding-left: 1.1rem;
+  position: relative;
+  line-height: 1.55;
+  font-weight: 300;
+}
+.proj-bullets li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.7rem;
+  top: 0.15rem;
+}
+
+.proj-stack {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+  line-height: 1.6;
+}
+.proj-stack b { color: var(--accent); font-weight: 400; }
+
+/* EXPERIENCE */
+#experience { background: var(--bg-raised); }
+
+.exp-list { max-width: 900px; }
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 2.5rem;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.exp-row:first-child { border-top: 1px solid var(--border); }
+
+.exp-when {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+.exp-where {
+  font-family: var(--mono);
+  font-size: 0.63rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  letter-spacing: 0.08em;
+}
+
+.exp-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.8rem;
+}
+
+.exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.exp-points li {
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.exp-points li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 1rem;
+  top: -0.05rem;
+}
+
+.exp-stack {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  margin-top: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+/* personal project */
+.personal-wrap { margin-top: 4rem; max-width: 900px; }
+
+.personal-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  overflow: hidden;
+}
+
+.personal-body { padding: 2rem 2.5rem; }
+
+.personal-title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 0.7rem;
+}
+
+.personal-desc {
+  font-size: 0.84rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  font-weight: 300;
+}
+
+.personal-media {
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+.personal-media::before, .personal-media::after {
+  content: '';
+  position: absolute;
+  width: 10px; height: 10px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.35;
+}
+.personal-media::before { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+.personal-media::after  { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+/* EDUCATION */
+#education { background: var(--bg); }
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 900px;
+}
+
+.edu-card {
+  background: var(--bg-raised);
+  padding: 1.8rem 2rem;
+  transition: background 0.2s;
+}
+.edu-card:hover { background: var(--surface); }
+
+.edu-degree {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.edu-school {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+/* FOOTER */
+footer {
+  padding: 1.8rem 3rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+  section { padding: 5rem 1.5rem; }
+  .hero { padding: 0 1.5rem; }
+  .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .proj { grid-template-columns: 1fr; }
+  .proj-media { min-height: 180px; border-right: none; border-bottom: 1px solid var(--border); }
+  .exp-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .personal-card { grid-template-columns: 1fr; }
+  .personal-media { min-height: 140px; border-left: none; border-top: 1px solid var(--border); }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">LH // CharacterTA</div>
+  <div class="nav-logo">Liz Herrera</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="mailto:liz.herrera.leon@gmail.com">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-
-  <p class="hero-tag">// Character Technical Artist</p>
-  <h1>LIZ<br/><span>HERRERA</span></h1>
-  <p class="hero-subtitle">
-    Rigging systems, OpenUSD pipelines, and avatar tooling — bridging art, engineering, and ML at production scale.
-  </p>
-  <div class="hero-links">
-    <a href="#projects" class="btn btn-primary">View Work</a>
-    <a href="mailto:liz.herrera.leon@gmail.com" class="btn btn-ghost">Get in Touch</a>
-    <a href="https://linkedin.com/in/liz-herreraa" target="_blank" class="btn btn-ghost">LinkedIn</a>
+<div class="hero">
+  <div class="hero-watermark">LH</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Character Technical Artist · Los Angeles</p>
+    <h1>LIZ<br/><em>HERRERA</em></h1>
+    <p class="hero-role">
+      Rigging systems, <strong>OpenUSD pipelines</strong>, and avatar tooling —<br/>
+      bridging art, engineering, and ML at production scale.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View Work</a>
+      <a href="mailto:liz.herrera.leon@gmail.com" class="btn btn-ghost">Get in Touch</a>
+      <a href="https://linkedin.com/in/liz-herreraa" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    </div>
+    <p class="hero-tagline">// rigging is just sculpture with math</p>
   </div>
-
-  <div class="hero-stats">
-    <div>
-      <div class="stat-num">1,800+</div>
-      <div class="stat-label">Assets Migrated</div>
-    </div>
-    <div>
-      <div class="stat-num">6,000+</div>
-      <div class="stat-label">3D Geo Variants Generated</div>
-    </div>
-    <div>
-      <div class="stat-num">150</div>
-      <div class="stat-label">USD Templates Authored</div>
-    </div>
-    <div>
-      <div class="stat-num">5+</div>
-      <div class="stat-label">Years Production</div>
-    </div>
-  </div>
-</section>
+  <div class="hero-rule"></div>
+</div>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-header reveal">
-    <span class="section-tag">01 //</span>
-    <h2 class="section-title">About</h2>
-    <div class="section-line"></div>
+  <div class="reveal">
+    <p class="sec-label">01 — About</p>
+    <h2 class="sec-title">Who I Am</h2>
   </div>
-
-  <div class="about-grid">
-    <div class="about-text reveal">
+  <div class="about-layout">
+    <div class="about-body reveal">
       <p>I'm a <strong>Character Technical Artist</strong> specializing in rigging systems, OpenUSD asset pipelines, and production tooling for large-scale avatar ecosystems. Based in Los Angeles.</p>
       <p>At <strong>Genies</strong>, I defined the <strong>Gen13 Avatar Standard</strong> — now the canonical structure for all production avatars — and built the systems that power how characters are rigged, exported, and shipped across the platform.</p>
-      <p>I work at the intersection of <strong>art, engineering, and ML</strong>: designing pipeline architecture, building Maya/Houdini tools that artists actually want to use, and delivering datasets that feed machine learning models.</p>
-      <p>I care about clean deformation, modular systems, and tooling that scales.</p>
+      <p>I work at the intersection of <strong>art, engineering, and ML</strong>: designing pipeline architecture, building Maya and Houdini tools that artists actually want to use, and delivering datasets that feed machine learning models.</p>
+      <p>I care about clean deformation, modular systems, and tools that don't get in the way of creativity.</p>
     </div>
-
-    <div class="about-skills reveal">
-      <div class="skill-row">
-        <div class="skill-label">DCC</div>
-        <div class="skill-tags">
-          <span class="tag">Maya</span>
-          <span class="tag">Houdini TOPS</span>
-          <span class="tag">Blender</span>
-          <span class="tag">Wrap3D</span>
-          <span class="tag">Unreal Engine</span>
-          <span class="tag">Unity</span>
+    <div class="skills-block reveal">
+      <div>
+        <div class="skill-group-label">DCC</div>
+        <div class="tags">
+          <span class="tag">Maya</span><span class="tag">Houdini</span><span class="tag">Blender</span><span class="tag">Wrap3D</span><span class="tag">Unreal</span><span class="tag">Unity</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-label">Pipeline / USD</div>
-        <div class="skill-tags">
-          <span class="tag">OpenUSD</span>
-          <span class="tag">MayaUSD</span>
-          <span class="tag">UsdSkel</span>
-          <span class="tag">UsdGeom</span>
-          <span class="tag">USDZ</span>
-          <span class="tag">GitHub Actions</span>
+      <div>
+        <div class="skill-group-label">Pipeline / USD</div>
+        <div class="tags">
+          <span class="tag">OpenUSD</span><span class="tag">MayaUSD</span><span class="tag">UsdSkel</span><span class="tag">UsdGeom</span><span class="tag">USDZ</span><span class="tag">GitHub Actions</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-label">Code</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">MEL</span>
-          <span class="tag">PySide2/6</span>
-          <span class="tag">Qt</span>
-          <span class="tag">OpenCV</span>
-          <span class="tag">NumPy</span>
+      <div>
+        <div class="skill-group-label">Code</div>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">MEL</span><span class="tag">PySide2/6</span><span class="tag">Qt</span><span class="tag">OpenCV</span><span class="tag">NumPy</span>
         </div>
       </div>
-      <div class="skill-row">
-        <div class="skill-label">Rigging</div>
-        <div class="skill-tags">
-          <span class="tag">Skinning</span>
-          <span class="tag">Blendshapes</span>
-          <span class="tag">FK/IK</span>
-          <span class="tag">OpenXR Facial</span>
-          <span class="tag">ARKit</span>
-          <span class="tag">FACS</span>
-          <span class="tag">mGear</span>
+      <div>
+        <div class="skill-group-label">Rigging</div>
+        <div class="tags">
+          <span class="tag">Skinning</span><span class="tag">Blendshapes</span><span class="tag">FK/IK</span><span class="tag">OpenXR Facial</span><span class="tag">ARKit</span><span class="tag">FACS</span><span class="tag">mGear</span>
         </div>
       </div>
     </div>
@@ -721,90 +665,107 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-header reveal">
-    <span class="section-tag">02 //</span>
-    <h2 class="section-title">Projects</h2>
-    <div class="section-line"></div>
+  <div class="reveal">
+    <p class="sec-label">02 — Projects</p>
+    <h2 class="sec-title">Selected Work</h2>
   </div>
+  <div class="projects-list">
 
-  <div class="projects-grid">
-
-    <!-- Project 1 -->
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 01 — AVATAR STANDARD</div>
-      <div class="project-title">Gen13 Avatar Standard</div>
-      <div class="project-media">
-        <!-- REPLACE: Add pipeline diagram image or video here -->
-        <!-- <img src="assets/gen13-diagram.png" alt="Gen13 pipeline diagram" style="width:100%;height:100%;object-fit:cover;"/> -->
+    <div class="proj reveal">
+      <div class="proj-media">
+        <!--
+          REPLACE with your asset:
+          <img src="assets/gen13-diagram.png" alt="Gen13 pipeline diagram"/>
+          or
+          <video src="assets/gen13.mp4" autoplay muted loop playsinline></video>
+        -->
         <div class="media-icon">⬡</div>
-        <div>Pipeline diagram — add asset here</div>
+        <span>Add diagram or<br/>pipeline overview</span>
       </div>
-      <p class="project-desc">Defined the canonical avatar standard used across all Genies production. Established skeleton, USD layer hierarchy, and OpenXR facial blendshape schema — the spec all downstream tooling depends on.</p>
-      <ul class="project-highlights">
-        <li>Defined USD assetInfo metadata schema used as canonical identifier pipeline-wide</li>
-        <li>Migrated ARKit 52-blendshape set → full OpenXR Face Tracking 2 expression set</li>
-        <li>Led batch migration of 1,800+ legacy wearable assets to the new standard</li>
-        <li>Authored 150 USD template files for humanoid and mammal asset types</li>
-      </ul>
-      <div class="project-stack"><span>Stack:</span> OpenUSD (USDA), OpenXR Face Tracking 2, Maya, Python</div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-num">01 — Avatar Standard</div>
+          <div class="proj-title">Gen13 Avatar Standard</div>
+          <p class="proj-desc">Defined the canonical avatar structure used across all Genies production — skeleton, OpenXR facial blendshape schema, and layered USD asset hierarchy. The spec all downstream tooling, CI, and rendering depends on.</p>
+          <ul class="proj-bullets">
+            <li>Established USD assetInfo metadata schema as pipeline-wide canonical identifier</li>
+            <li>Migrated ARKit 52-blendshape set → full OpenXR Face Tracking 2 expression set</li>
+            <li>Led batch migration of 1,800+ legacy wearable assets to the new standard</li>
+            <li>Authored 150 USD template files for humanoid and mammal asset types</li>
+          </ul>
+        </div>
+        <div class="proj-stack"><b>Stack:</b> OpenUSD (USDA), OpenXR Face Tracking 2, Maya, Python</div>
+      </div>
     </div>
 
-    <!-- Project 2 -->
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 02 — PIPELINE TOOL</div>
-      <div class="project-title">Rapid Companion Tool + USD Export API</div>
-      <div class="project-media">
-        <!-- REPLACE: Add screen recording or tool screenshot here -->
-        <!-- <video src="assets/rapid-tool-demo.mp4" autoplay muted loop style="width:100%;height:100%;object-fit:cover;"></video> -->
+    <div class="proj reveal">
+      <div class="proj-media">
+        <!--
+          <video src="assets/rapid-tool.mp4" autoplay muted loop playsinline></video>
+        -->
         <div class="media-icon">⬡</div>
-        <div>Tool demo — add screen recording here</div>
+        <span>Add screen recording<br/>or tool screenshot</span>
       </div>
-      <p class="project-desc">End-to-end Maya rigging companion covering the full avatar workflow — mesh loading through USD export and CI/CD pipeline dispatch — without leaving Maya.</p>
-      <ul class="project-highlights">
-        <li>PySide2/6 tool: mesh load → skeleton bind → skinning → blendshapes → export → publish</li>
-        <li>Modular USD export API producing layered avatar.usd/usdz packages</li>
-        <li>Sparse iteration layer system for non-destructive artist overrides on a published base</li>
-        <li>GitHub Actions dispatch embedded so artists can trigger and monitor CI jobs in-tool</li>
-      </ul>
-      <div class="project-stack"><span>Stack:</span> Python, PySide2/6, OpenUSD, MayaUSD, GitHub Actions API</div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-num">02 — Pipeline Tool</div>
+          <div class="proj-title">Rapid Companion Tool + USD Export API</div>
+          <p class="proj-desc">End-to-end Maya rigging companion covering the full avatar workflow — mesh loading through USD export and CI/CD dispatch — without leaving Maya. Built alongside a modular USD export API that powers the export layer.</p>
+          <ul class="proj-bullets">
+            <li>PySide2/6 hub: mesh load → skeleton bind → skinning → blendshapes → export → publish</li>
+            <li>Modular export API producing layered avatar.usd/usdz with independently-skippable steps</li>
+            <li>Sparse iteration layer system for non-destructive artist overrides on a published base</li>
+            <li>GitHub Actions dispatch embedded — trigger and monitor CI jobs without leaving Maya</li>
+          </ul>
+        </div>
+        <div class="proj-stack"><b>Stack:</b> Python, PySide2/6, OpenUSD, MayaUSD, GitHub Actions API</div>
+      </div>
     </div>
 
-    <!-- Project 3 -->
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 03 — ML DATA SYSTEMS</div>
-      <div class="project-title">Facial Landmarks + Synthetic Geometry</div>
-      <div class="project-media">
-        <!-- REPLACE: Add landmark diagram or geometry grid here -->
-        <!-- <img src="assets/landmarks.png" alt="Facial landmark diagram" style="width:100%;height:100%;object-fit:cover;"/> -->
+    <div class="proj reveal">
+      <div class="proj-media">
+        <!--
+          <img src="assets/landmarks.png" alt="Facial landmark diagram"/>
+        -->
         <div class="media-icon">⬡</div>
-        <div>Landmark diagram — add asset here</div>
+        <span>Add landmark diagram<br/>or geometry grid</span>
       </div>
-      <p class="project-desc">Designed the 3D facial landmark specification for humanoid and mammal characters stored directly in USD, and built a Houdini TOPS pipeline to generate thousands of synthetic head geometry variants for ML training.</p>
-      <ul class="project-highlights">
-        <li>Landmark spec: jaw contour, brow, eye contour, lip, pupil encoded as UsdGeom.Points in USD</li>
-        <li>Extended COCO to 57 joints with full bilateral hand skeleton</li>
-        <li>Houdini TOPS network: 6,000+ facial variants from 500 heads × 5 ethnic groups, full batch</li>
-        <li>Delivered ground truth data for Genies humanoid and mammal face detection models</li>
-      </ul>
-      <div class="project-stack"><span>Stack:</span> Houdini TOPS, OpenUSD, Python (hou API), OpenCV, NumPy, COCO keypoints</div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-num">03 — ML Data Systems</div>
+          <div class="proj-title">Facial Landmarks + Synthetic Geometry</div>
+          <p class="proj-desc">Designed the 3D facial landmark specification for humanoid and mammal characters stored directly in USD, and built a Houdini TOPS pipeline generating thousands of synthetic head variants for ML training.</p>
+          <ul class="proj-bullets">
+            <li>Landmark spec encoded as UsdGeom.Points: jaw, brow, eye contour, lip, pupil for human and mammal</li>
+            <li>Extended COCO to 57 joints with full bilateral hand skeleton — delivered as ML training ground truth</li>
+            <li>Houdini TOPS: 6,000+ facial variants from 500 head targets across 5 ethnic groups, fully batched</li>
+          </ul>
+        </div>
+        <div class="proj-stack"><b>Stack:</b> Houdini TOPS, OpenUSD, Python (hou API), OpenCV, NumPy, COCO keypoints</div>
+      </div>
     </div>
 
-    <!-- Project 4 -->
-    <div class="project-card reveal">
-      <div class="project-num">PROJECT 04 — SUPPORTING TOOLS</div>
-      <div class="project-title">Production Maya Toolset</div>
-      <div class="project-media">
-        <!-- REPLACE: Add tool screenshot or diagram here -->
+    <div class="proj reveal">
+      <div class="proj-media">
+        <!--
+          <img src="assets/tools-ui.png" alt="Maya tools UI"/>
+        -->
         <div class="media-icon">⬡</div>
-        <div>Tool UI — add screenshot here</div>
+        <span>Add tool UI<br/>screenshot</span>
       </div>
-      <p class="project-desc">Suite of Maya/PySide production tools built to solve specific pipeline friction points for the rigging and technical art team.</p>
-      <ul class="project-highlights">
-        <li>Unified Asset Processing Tool: batch wearable refit with dry-run validation and QC turntable</li>
-        <li>Material → USD Converter: any shader network to usdPreviewSurface, with ORM texture baking</li>
-        <li>Blendshape Calibrator: normalize blend targets with dual list/tree view, Maya 2024/2025 support</li>
-      </ul>
-      <div class="project-stack"><span>Stack:</span> Python, maya.cmds, MayaUSD, PySide2/6, OpenCV, NumPy</div>
+      <div class="proj-body">
+        <div>
+          <div class="proj-num">04 — Tooling</div>
+          <div class="proj-title">Production Maya Toolset</div>
+          <p class="proj-desc">Suite of Maya/PySide tools built to solve specific friction points for the rigging and technical art team — each shipped and used in production.</p>
+          <ul class="proj-bullets">
+            <li><strong style="color:var(--text);font-weight:500">UAPT:</strong> Batch wearable refit pipeline with dry-run validation, JSON asset metadata autofill, and QC turntable</li>
+            <li><strong style="color:var(--text);font-weight:500">Material → USD Converter:</strong> Any shader network to usdPreviewSurface with on-the-fly ORM texture baking</li>
+            <li><strong style="color:var(--text);font-weight:500">Blendshape Calibrator:</strong> Normalize blend targets — dual list/tree view, Maya 2024/2025 compatible</li>
+          </ul>
+        </div>
+        <div class="proj-stack"><b>Stack:</b> Python, maya.cmds, MayaUSD, PySide2/6, OpenCV, NumPy</div>
+      </div>
     </div>
 
   </div>
@@ -812,131 +773,133 @@
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-header reveal">
-    <span class="section-tag">03 //</span>
-    <h2 class="section-title">Experience</h2>
-    <div class="section-line"></div>
+  <div class="reveal">
+    <p class="sec-label">03 — Experience</p>
+    <h2 class="sec-title">Work History</h2>
   </div>
+  <div class="exp-list">
 
-  <div class="experience-list">
-
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-dates">Jan 2025 – Present</div>
-        <div class="exp-company">Genies</div>
+    <div class="exp-row reveal">
+      <div>
+        <div class="exp-when">Jan 2025 – Present</div>
+        <div class="exp-where">Genies</div>
       </div>
-      <div class="exp-right">
+      <div>
         <div class="exp-title">Character Technical Artist</div>
-        <ul class="exp-bullets">
+        <ul class="exp-points">
           <li>Defined the Gen13 Avatar Standard and USD template hierarchy (150 files) for all production avatars</li>
-          <li>Built Rapid Companion Tool, USD Export API, and ML data generation pipeline</li>
+          <li>Built the Rapid Companion Tool, USD Export API, and ML facial data generation pipeline</li>
           <li>Led migration of 1,800+ legacy wearable assets to the new standard</li>
         </ul>
+        <div class="exp-stack">Python · OpenUSD · MayaUSD · PySide2/6 · Houdini · GitHub Actions</div>
       </div>
     </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-dates">Jul 2022 – Dec 2024</div>
-        <div class="exp-company">Genies</div>
+    <div class="exp-row reveal">
+      <div>
+        <div class="exp-when">Jul 2022 – Dec 2024</div>
+        <div class="exp-where">Genies</div>
       </div>
-      <div class="exp-right">
+      <div>
         <div class="exp-title">Character TD</div>
-        <ul class="exp-bullets">
+        <ul class="exp-points">
           <li>Built character rigs, wearable assets, and props for production</li>
           <li>Developed rigging tools and pipeline automation in Maya/Python</li>
-          <li>Implemented deformation workflows leveraging matrix transforms and skeletal hierarchies</li>
+          <li>Implemented deformation workflows using matrix transforms and skeletal hierarchies</li>
         </ul>
+        <div class="exp-stack">Maya · Python · PySide2</div>
       </div>
     </div>
 
-    <div class="exp-item reveal">
-      <div class="exp-left">
-        <div class="exp-dates">2020 – 2021</div>
-        <div class="exp-company">Quantic · Raptor Studios</div>
+    <div class="exp-row reveal">
+      <div>
+        <div class="exp-when">2020 – 2021</div>
+        <div class="exp-where">Quantic · Raptor Studios</div>
       </div>
-      <div class="exp-right">
+      <div>
         <div class="exp-title">Rigging Artist</div>
-        <ul class="exp-bullets">
+        <ul class="exp-points">
           <li>Created production character rigs with control systems and deformation setups</li>
           <li>Skinning, deformation adjustments, and collaboration with animation teams</li>
         </ul>
+        <div class="exp-stack">Maya · Python</div>
       </div>
     </div>
 
   </div>
 
-  <!-- Personal Project -->
-  <div style="margin-top: 4rem;">
-    <div class="section-header reveal" style="margin-bottom: 1.5rem;">
-      <span class="section-tag">03b //</span>
-      <h2 class="section-title" style="font-size: 1.4rem;">Personal Project</h2>
-    </div>
-    <div class="personal-card reveal">
-      <div>
-        <div class="project-num" style="margin-bottom: 0.8rem;">PERSONAL — FACIAL RETARGETING</div>
-        <div class="project-title" style="font-size: 1rem; margin-bottom: 0.8rem;">MediaPipe → Maya Facial Retargeting</div>
-        <p class="project-desc" style="margin-bottom: 0; font-size: 0.85rem;">Used MediaPipe to track ARKit blendshape values from video and map per-frame JSON configs onto a Maya rig's controls — a lightweight facial motion retargeting pipeline from video to character.</p>
+  <div class="personal-wrap reveal">
+    <p class="sec-label" style="margin-bottom:1rem;">Personal Project</p>
+    <div class="personal-card">
+      <div class="personal-body">
+        <div class="personal-title">MediaPipe → Maya Facial Retargeting</div>
+        <p class="personal-desc">Used MediaPipe to track ARKit blendshape values from video and map per-frame JSON configs onto a Maya rig's controls — a lightweight facial motion retargeting pipeline from raw video to driven character.</p>
+        <div class="exp-stack" style="margin-top:1rem;">Python · MediaPipe · Maya · ARKit blendshapes · JSON</div>
       </div>
-      <div>
-        <div class="project-media" style="aspect-ratio: 4/3;">
-          <!-- REPLACE: Add demo video or GIF here -->
-          <!-- <video src="assets/mediapipe-demo.mp4" autoplay muted loop style="width:100%;height:100%;object-fit:cover;"></video> -->
-          <div class="media-icon">⬡</div>
-          <div>Demo video — add here</div>
-        </div>
+      <div class="personal-media">
+        <!--
+          <video src="assets/mediapipe-demo.mp4" autoplay muted loop playsinline
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
+        -->
+        <div class="media-icon" style="font-size:1.4rem;">⬡</div>
+        <span>Add demo video<br/>or GIF here</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-tag reveal" style="margin-bottom: 1rem; display: block;">04 // Contact</div>
-    <h2 class="reveal">Let's work<br/>together.</h2>
-    <p class="reveal">Open to Character TA, Rigging, and Pipeline roles at games studios and tech platforms. Based in Los Angeles — available for on-site or hybrid.</p>
-    <div class="contact-links reveal">
-      <a href="mailto:liz.herrera.leon@gmail.com" class="btn btn-primary">liz.herrera.leon@gmail.com</a>
-      <a href="https://linkedin.com/in/liz-herreraa" target="_blank" class="btn btn-ghost">LinkedIn</a>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="reveal">
+    <p class="sec-label">04 — Education</p>
+    <h2 class="sec-title">Training</h2>
+  </div>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">Engineering in Animation & VFX</div>
+      <div class="edu-school">Universidad Politécnica de Santa Rosa</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Master in Rigging for Animation & Videogames</div>
+      <div class="edu-school">Libel Academy</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Rigging for Character TDs</div>
+      <div class="edu-school">Keyframe Animation School</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Advanced Python for TDs</div>
+      <div class="edu-school">TD Academy</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Liz Herrera</p>
-  <p>Character Technical Artist — Los Angeles, CA</p>
+  <p>© 2026 Liz Herrera — Character Technical Artist</p>
+  <p>Los Angeles, CA · liz.herrera.leon@gmail.com</p>
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Active nav highlight
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
+  const links = document.querySelectorAll('.nav-links a');
   window.addEventListener('scroll', () => {
     let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    links.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
     });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current
-        ? 'var(--accent2)'
-        : 'var(--text-dim)';
-    });
-  });
+  }, { passive: true });
 </script>
 
 </body>
