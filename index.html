@@ -1286,14 +1286,8 @@
 
       <div class="proj reveal">
         <div class="proj-media">
-          <!--
-          REPLACE with your asset:
-          <img src="assets/gen13-diagram.png" alt="Gen13 pipeline diagram"/>
-          or
-          <video src="assets/gen13.mp4" autoplay muted loop playsinline></video>
-        -->
-          <div class="media-icon">⬡</div>
-          <span>Add diagram or<br />pipeline overview</span>
+          <img src="src/avatar-standard/next-gen.png" alt="Next-Gen Rig Standard"
+            style="width:100%; height:100%; object-fit:cover; border-radius:4px;" />
         </div>
         <div class="proj-body">
           <div>
@@ -1313,11 +1307,8 @@
 
       <div class="proj reveal">
         <div class="proj-media">
-          <!--
-          <video src="assets/rapid-tool.mp4" autoplay muted loop playsinline></video>
-        -->
-          <div class="media-icon">⬡</div>
-          <span>Add screen recording<br />or tool screenshot</span>
+          <img src="src/autorigging-tool_usd-exports/autorriging-pipe.png" alt="Maya Autorigging Tool pipeline"
+            style="width:100%; height:100%; object-fit:cover; border-radius:4px;" />
         </div>
         <div class="proj-body">
           <div>
@@ -1329,7 +1320,7 @@
               <li>PySide2 UI: mesh load → skeleton → skinning → blendshapes → export → publish</li>
               <li>Modular export API producing layered usdz packages with independently-skippable steps</li>
               <li>Sparse iteration layer system for non-destructive artist overrides on a published base</li>
-              <li>GitHub Actions dispatch embedded.Trigger CI jobs without leaving Maya</li>
+              <li>GitHub Actions dispatch embedded without leaving Maya</li>
             </ul>
           </div>
           <div class="proj-stack"><b>Stack:</b> Python, PySide2/6, OpenUSD, MayaUSD, GitHub Actions API</div>
@@ -1340,11 +1331,8 @@
       <!-- MediaPipe (position 3) -->
       <div class="proj reveal">
         <div class="proj-media">
-          <!--
-            <video src="assets/mediapipe-demo.mp4" autoplay muted loop playsinline></video>
-          -->
-          <div class="media-icon">⬡</div>
-          <span>Add demo video<br />or GIF here</span>
+          <img src="src/mediapipe/mediapipe.png" alt="Personal Project using Mediapipe"
+            style="width:100%; height:100%; object-fit:cover; border-radius:4px;" />
         </div>
         <div class="proj-body">
           <div>
@@ -1366,21 +1354,18 @@
 
       <div class="proj reveal">
         <div class="proj-media">
-          <!--
-          <img src="assets/landmarks.png" alt="Facial landmark diagram"/>
-        -->
-          <div class="media-icon">⬡</div>
-          <span>Add landmark diagram<br />or geometry grid</span>
+          <img src="src/syntethic-data/syntethic-data.png" alt="Synthetic Data Architecture"
+            style="width:100%; height:100%; object-fit:cover; border-radius:4px;" />
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-title">Facial Landmarks + Synthetic Geometry</div>
+            <div class="proj-title">Synthetic Data</div>
             <p class="proj-desc">Designed the 3D facial landmark specification for humanoid and mammal characters stored
               directly in USD, and built a Houdini TOPS pipeline generating thousands of synthetic head variants for ML
               training.</p>
             <ul class="proj-bullets">
-              <li>Landmark spec encoded as UsdGeom.Points: jaw, brow, eye contour, lip, pupil for human and mammal</li>
-              <li>Extended COCO to 57 joints with full bilateral hand skeleton — delivered as ML training ground truth
+              <li>Extended limited face landmark points dataset to support humanoid and mammal faces, delivered as ML
+                training ground truth
               </li>
               <li>Houdini TOPS: 6,000+ facial variants from 500 head targets across 5 ethnic groups, fully batched</li>
             </ul>
@@ -1393,11 +1378,8 @@
 
       <div class="proj reveal">
         <div class="proj-media">
-          <!--
-          <img src="assets/tools-ui.png" alt="Maya tools UI"/>
-        -->
-          <div class="media-icon">⬡</div>
-          <span>Add tool UI<br />screenshot</span>
+          <img src="src/maya-tooling/maya-tooling.png" alt="Production Maya Toolset UI"
+            style="width:100%; height:100%; object-fit:cover; border-radius:4px;" />
         </div>
         <div class="proj-body">
           <div>
@@ -1405,12 +1387,11 @@
             <p class="proj-desc">Suite of Maya/PySide tools built to solve specific friction points for the rigging and
               technical art team — each shipped and used in production.</p>
             <ul class="proj-bullets">
-              <li><strong style="color:var(--text);font-weight:500">UAPT:</strong> Batch wearable refit pipeline with
-                dry-run validation, JSON asset metadata autofill, and QC turntable</li>
+              <li><strong style="color:var(--text);font-weight:500">UAPT:</strong> Batch wearable refit pipeline.</li>
               <li><strong style="color:var(--text);font-weight:500">Material → USD Converter:</strong> Any shader
-                network to usdPreviewSurface with on-the-fly ORM texture baking</li>
-              <li><strong style="color:var(--text);font-weight:500">Blendshape Calibrator:</strong> Normalize blend
-                targets — dual list/tree view, Maya 2024/2025 compatible</li>
+                network to usdPreviewSurface with on-the-fly ORM texture extraction from MetallicSmoothness maps.</li>
+              <li><strong style="color:var(--text);font-weight:500">Blendshape Normalization:</strong> Normalize blend
+                targets: dual list/tree view.</li>
             </ul>
           </div>
           <div class="proj-stack"><b>Stack:</b> Python, maya.cmds, MayaUSD, PySide2/6, OpenCV, NumPy</div>
@@ -1538,86 +1519,49 @@
         <img src="src/autorigging-tool_usd-exports/export_usd-pipeline_diagram.png" alt="USD Export Pipeline Diagram"
           style="width:100%; border-radius:4px; margin-top:0.5rem; display:block;" />
       </div>
+      <div class="modal-section-label">Avatar published in web</div>
+      <video src="src/autorigging-tool_usd-exports/avatar-in-web.mp4" autoplay muted loop playsinline
+        style="width:100%; border-radius:4px; margin-top:0.5rem; display:block;"></video>
       <div class="modal-divider"></div>
     </div>
   </div>
 
-  <!-- MODAL 3: ML Facial Landmarks -->
+  <!-- MODAL 3: Synthetic Geometry -->
   <div class="modal-overlay" id="modal-ml" role="dialog" aria-modal="true" aria-labelledby="modal-ml-title">
     <div class="modal-panel">
       <button class="modal-close" onclick="closeModal('modal-ml')">✕ CLOSE</button>
-      <div class="modal-eyebrow">03 — ML Data Systems</div>
-      <div class="modal-title" id="modal-ml-title">Facial Landmarks<br />+ Synthetic Geometry</div>
+      <div class="modal-title" id="modal-ml-title">Synthetic Data Pipeline</div>
       <div class="modal-stack">Houdini TOPS · OpenUSD · Python (hou API) · OpenCV · NumPy · COCO keypoints</div>
 
       <div class="modal-section">
-        <div class="modal-section-label">The Challenge</div>
         <p>The ML team needed 3D facial landmark ground truth data for both humanoid and mammal character types across
-          diverse ethnic groups — data that didn't exist and couldn't be purchased off the shelf. The landmark
-          specification had to be rigorous enough for CNN training while being naturally embedded in the same USD
-          asset
-          pipeline the art team used daily.</p>
+          diverse groups...data that didn't exist and couldn't be purchased off the shelf. The landmark
+          specification had to be prepared so it allows the pipeline to categorize character types (cartoon, mammal,
+          humanoid, etc.).</p>
       </div>
 
       <div class="modal-divider"></div>
 
       <div class="modal-section">
         <div class="modal-section-label">Architecture</div>
-        <p>I designed and encoded the full landmark specification as <strong>UsdGeom.Points</strong> primitives stored
-          directly within each avatar USD asset — jaw, brow, eye contour, lip, and pupil sets for human and mammal.
-          This
-          meant ML engineers could consume training data directly from the USD pipeline without any conversion step.
+        <p>The team and I designed the full landmark specification for 2D landmark detection from rendered images.
         </p>
         <ul>
-          <li>Extended COCO keypoint schema from 17 to 57 joints with bilateral hand skeleton — delivered as ML
-            training
-            ground truth</li>
-          <li>Houdini TOPS batch network generating 6,000+ unique facial geometry variants from 500 base head targets
+          <li>For training using new landmarks, we needed 6k+ unique facial geometry variants from 500 base head targets
+          </li>
+          <li>Houdini TOPS batch network generating 6k+ unique facial geometry variants from 500 base head targets
           </li>
           <li>Procedural blending across 5 ethnic groups using zone-based blendshape mixing — fully automated, no
-            manual
-            sculpting per variant</li>
-          <li>OpenCV + NumPy post-processing for consistent UV and normal alignment across all generated variants</li>
+            manual sculpting per variant</li>
         </ul>
+        <img src="src/syntethic-data/houdini2.png" alt="Houdini TOPS Network"
+          style="width:100%; border-radius:4px; margin: 0.5rem auto 0 auto; display:block;" />
+        <img src="src/syntethic-data/generate vars houdini.png" alt="Generated Facial Variants"
+          style="width:100%; border-radius:4px; margin: 0.5rem auto 0 auto; display:block;" />
       </div>
 
       <div class="modal-divider"></div>
 
-      <div class="modal-section">
-        <div class="modal-section-label">Media — Diagrams &amp; Data Samples</div>
-        <p style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.8rem;">// Add landmark overlay diagrams,
-          Houdini network screenshots, or redacted geometry grids</p>
-        <div class="modal-media-grid">
-          <div class="modal-media-item">
-            <!-- <img src="assets/landmarks-face.png" alt="Facial landmark overlay" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>Landmark Overlay Diagram</span>
-          </div>
-          <div class="modal-media-item">
-            <!-- <img src="assets/houdini-tops-network.png" alt="Houdini TOPS network" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>Houdini TOPS Network</span>
-          </div>
-          <div class="modal-media-item">
-            <!-- <img src="assets/geometry-variants.png" alt="Generated geometry variants" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>Geometry Variant Grid</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-divider"></div>
-
-      <div class="modal-section">
-        <div class="modal-section-label">Impact</div>
-        <ul>
-          <li>6,000+ facial variants delivered as ML training data, consumed directly without conversion pipeline</li>
-          <li>Landmark spec became the shared contract between Art and ML teams — zero ambiguity about joint
-            definitions
-          </li>
-          <li>Extended COCO schema adopted as the ground truth format for body pose estimation models</li>
-        </ul>
-      </div>
     </div>
   </div>
 
@@ -1630,12 +1574,11 @@
       <div class="modal-stack">Python · maya.cmds · MayaUSD · PySide2/6 · OpenCV · NumPy</div>
 
       <div class="modal-section">
-        <div class="modal-section-label">The Challenge</div>
         <p>Three recurring friction points in the pipeline were slowing the team down: (1) batch refitting wearable
           assets to updated base meshes was manual and error-prone, (2) exporting shader networks to USD required
-          manual
-          mapping every single time, and (3) blendshape target weights were inconsistently normalized across the
-          library, causing visual pops at runtime. Each needed a dedicated, artist-facing solution.</p>
+          manual mapping every single time, and (3) blendshape target weights transferred from one head proportion to
+          another needed normalization for more appealing expressions. Each needed a dedicated, artist-facing solution.
+        </p>
       </div>
 
       <div class="modal-divider"></div>
@@ -1643,56 +1586,34 @@
       <div class="modal-section">
         <div class="modal-section-label">Tools Built</div>
         <ul>
-          <li><strong style="color:var(--text)">UAPT — Universal Avatar Pipeline Tool:</strong> Batch wearable refit
-            pipeline running dry-run validation, JSON asset metadata autofill, and QC turntable generation. Processes
-            a
-            full library of assets overnight without supervision.</li>
-          <li><strong style="color:var(--text)">Material → USD Converter:</strong> Walks any Maya shader network graph
-            and maps each node to its <code>usdPreviewSurface</code> equivalent. On-the-fly Unity MetallicSmoothness →
-            glTF ORM texture conversion via OpenCV/NumPy baked in.</li>
-          <li><strong style="color:var(--text)">Blendshape Calibrator:</strong> Normalizes blendshape target weights
-            across an entire library via dual list/tree view. Targets are validated, clamped, and rewritten in-place.
-            Maya 2024 and 2025 compatible.</li>
+          <li><strong style="color:var(--text)">UAPT — Universal Avatar Pipeline Tool:</strong> PySide2 Maya panel built
+            for batch-refitting wearable assets across avatar generations. Artists select any number of wearables
+            from a live server-backed asset browser filtered by category and subcategory, configure source and target
+            templates, and run a full conversion pipeline that handles refit, rig rebuild, skin weight transfer,
+            blendshape delta application, and FBX export for Unity packaging in one pass. The UI has a
+            visualization mode that launches a QC turntable scene to review the refitted results directly in Maya</li>
+          <img src="src/maya-tooling/UAPT.png" alt="UAPT UI"
+            style="width:60%; border-radius:4px; margin: 0.5rem auto 0 auto; display:block;" />
+          <li><strong style="color:var(--text)">Material → USD Converter:</strong> Maya utility that converts any
+            non-USD shader in a scene to a properly wired usdPreviewSurface network, making assets runtime-ready for USD
+            pipelines. It identifies textures by standardized naming suffixes, detects opacity connections and builds a
+            new shading network with correct color space assignments per channel. When only a Unity _MetallicSmoothness
+            texture exists, it uses OpenCV to extract and remap ORM channels: Metallic from R, Roughness inverted from
+            the Alpha, and writes a new ORM.png to disk in glTF 2.0 channel order before wiring it into the USD
+            network.</li>
+          <img src="src/maya-tooling/usd-preview-surface.png" alt="USDPreviewSurface result"
+            style="width:100%; border-radius:4px; margin: 0.5rem auto 0 auto; display:block;" />
+          <li><strong style="color:var(--text)">Blendshape Calibrator:</strong> Lightweight Maya PySide2 panel for
+            normalizing
+            blendshape target values across a scene. It supports two modes switchable at runtime: Blendshape Node mode
+            shows a flat multi-select list of all blendShape nodes in the scene, while Blendshape Target mode shows a
+            tree view with individual targets as selectable children — letting artists normalize one specific target
+            without touching the others..</li>
+          <img src="src/maya-tooling/bshape-normalization.png" alt="BShape Normalization UI"
+            style="width:50%; border-radius:4px; margin: 0.5rem auto 0 auto; display:block;" />
         </ul>
       </div>
-
       <div class="modal-divider"></div>
-
-      <div class="modal-section">
-        <div class="modal-section-label">Media — Tool UIs &amp; Workflow Recordings</div>
-        <p style="font-size:0.75rem;color:var(--text-dim);margin-bottom:0.8rem;">// Add screenshots or recordings of
-          each tool's UI (blur proprietary asset names as needed)</p>
-        <div class="modal-media-grid">
-          <div class="modal-media-item">
-            <!-- <img src="assets/uapt-ui.png" alt="UAPT tool UI" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>UAPT — UI</span>
-          </div>
-          <div class="modal-media-item">
-            <!-- <img src="assets/material-converter-ui.png" alt="Material converter UI" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>Material → USD Converter</span>
-          </div>
-          <div class="modal-media-item">
-            <!-- <img src="assets/blendshape-calibrator.png" alt="Blendshape calibrator tree view" /> -->
-            <span class="modal-media-placeholder">⬡</span>
-            <span>Blendshape Calibrator</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-divider"></div>
-
-      <div class="modal-section">
-        <div class="modal-section-label">Impact</div>
-        <ul>
-          <li>UAPT eliminated overnight manual work — batch runs process full wearable libraries unsupervised</li>
-          <li>Material converter reduced per-asset USD export time from ~45 min manual to under 2 min automated</li>
-          <li>Blendshape Calibrator resolved an entire category of runtime visual artifacts across the wearable
-            library
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 
