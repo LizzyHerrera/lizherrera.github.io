@@ -1202,18 +1202,22 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#resume">Resume</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="src/LizHerrera_Resume_20206.pdf" download
+          style="color:var(--accent);border:1px solid rgba(200,169,110,0.35);padding:0.25rem 0.7rem;border-radius:1px;transition:border-color 0.2s,background 0.2s;"
+          onmouseover="this.style.borderColor='var(--accent)';this.style.background='rgba(200,169,110,0.1)'"
+          onmouseout="this.style.borderColor='rgba(200,169,110,0.35)';this.style.background=''">Resume ↓</a></li>
     </ul>
   </nav>
 
   <div class="hero">
     <div class="hero-watermark">LH</div>
     <div class="hero-content">
+      <div class="hero-eyebrow">Technical Artist — Character Systems &amp; Rigging</div>
       <h1>LIZ<br /><em>HERRERA</em></h1>
       <p class="hero-role">
-        Rigging systems, OpenUSD pipelines, and avatar tooling —<br />
-        bridging art, engineering, and ML at production scale.
+        Technical Artist, specializing in character rigging systems, OpenUSD pipelines, and DCCs tooling.<br />
+        Bridging art, engineering, and ML at production scale.
       </p>
       <p class="hero-tagline">// Rigging is just sculpture with math</p>
     </div>
@@ -1227,15 +1231,17 @@
     </div>
     <div class="about-layout">
       <div class="about-body reveal">
-        <p>I'm a <strong>Character Technical Artist</strong> specializing in rigging systems, OpenUSD asset pipelines,
-          and production tooling for large-scale avatar ecosystems. Based in Los Angeles.</p>
-        <p>At <strong>Genies</strong>, I defined the <strong>Gen13 Avatar Standard</strong> — now the canonical
-          structure for all production avatars — and built the systems that power how characters are rigged, exported,
-          and shipped across the platform.</p>
-        <p>I work at the intersection of <strong>art, engineering, and ML</strong>: designing pipeline architecture,
-          building Maya and Houdini tools that artists actually want to use, and delivering datasets that feed machine
-          learning models.</p>
-        <p>I care about clean deformation, modular systems, and tools that don't get in the way of creativity.</p>
+        <p>I'm a <strong>Character Technical Artist</strong> focused on building the systems behind character creation.
+        </p>
+        <p>My work centers on rigging frameworks, OpenUSD pipelines, and DCC tooling across Maya, Houdini, and Blender.
+          Rather than solving problems one asset at a time, I prefer designing solutions that can scale — systems that
+          allow artists to create and iterate efficiently across large asset ecosystems.</p>
+        <p>Rigging sits at the intersection of math and art, which is exactly where I enjoy working. I like solving
+          technically challenging problems while keeping the artist experience at the center. The most satisfying
+          solutions are those that are both technically elegant and intuitive to use.</p>
+        <p>Curiosity drives my work. I'm constantly exploring new tools, technologies, and disciplines... from scripting
+          and pipeline design to sports, languages, philosophy, and art. If there's something to understand, I want to
+          understand it.</p>
       </div>
       <div class="skills-block reveal">
         <div>
@@ -1291,8 +1297,7 @@
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-num">01 — Avatar Standard</div>
-            <div class="proj-title">Gen13 Avatar Standard</div>
+            <div class="proj-title">Next-Gen Rig Standard</div>
             <p class="proj-desc">Defined the canonical avatar structure used across all Genies production — skeleton,
               OpenXR facial blendshape schema, and layered USD asset hierarchy. The spec all downstream tooling, CI, and
               rendering depends on.</p>
@@ -1318,16 +1323,15 @@
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-num">02 — Pipeline Tool</div>
-            <div class="proj-title">Rapid Companion Tool + USD Export API</div>
-            <p class="proj-desc">End-to-end Maya rigging companion covering the full avatar workflow — mesh loading
-              through USD export and CI/CD dispatch — without leaving Maya. Built alongside a modular USD export API
+            <div class="proj-title">Maya Autorigging Tool + USD Export API</div>
+            <p class="proj-desc">End-to-end Maya rigging tool covering the full avatar workflow — mesh loading
+              through USD export and CI dispatch, without leaving Maya. Built alongside a modular USD export API
               that powers the export layer.</p>
             <ul class="proj-bullets">
-              <li>PySide2/6 hub: mesh load → skeleton bind → skinning → blendshapes → export → publish</li>
-              <li>Modular export API producing layered avatar.usd/usdz with independently-skippable steps</li>
+              <li>PySide2 UI: mesh load → skeleton → skinning → blendshapes → export → publish</li>
+              <li>Modular export API producing layered usdz packages with independently-skippable steps</li>
               <li>Sparse iteration layer system for non-destructive artist overrides on a published base</li>
-              <li>GitHub Actions dispatch embedded — trigger and monitor CI jobs without leaving Maya</li>
+              <li>GitHub Actions dispatch embedded.Trigger CI jobs without leaving Maya</li>
             </ul>
           </div>
           <div class="proj-stack"><b>Stack:</b> Python, PySide2/6, OpenUSD, MayaUSD, GitHub Actions API</div>
@@ -1345,7 +1349,6 @@
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-num">03 — ML Data Systems</div>
             <div class="proj-title">Facial Landmarks + Synthetic Geometry</div>
             <p class="proj-desc">Designed the 3D facial landmark specification for humanoid and mammal characters stored
               directly in USD, and built a Houdini TOPS pipeline generating thousands of synthetic head variants for ML
@@ -1373,7 +1376,6 @@
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-num">04 — Tooling</div>
             <div class="proj-title">Production Maya Toolset</div>
             <p class="proj-desc">Suite of Maya/PySide tools built to solve specific friction points for the rigging and
               technical art team — each shipped and used in production.</p>
@@ -1402,7 +1404,6 @@
         </div>
         <div class="proj-body">
           <div>
-            <div class="proj-num">05 — R&amp;D / Personal</div>
             <div class="proj-title">MediaPipe → Maya Facial Retargeting</div>
             <p class="proj-desc">Lightweight facial motion retargeting pipeline: MediaPipe tracks ARKit blendshape
               values from standard video and maps per-frame JSON configs directly onto a Maya rig's controls — raw
@@ -1422,102 +1423,6 @@
     </div>
   </section>
 
-  <!-- RESUME -->
-  <section id="resume">
-    <div class="reveal">
-      <h2 class="sec-title">Resume</h2>
-    </div>
-
-    <div class="timeline">
-
-      <!-- Work -->
-      <div class="tl-item reveal">
-        <div class="tl-left">
-          <div class="tl-when">Jan 2025 – Present</div>
-          <div class="tl-where">Genies</div>
-        </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <span class="tl-badge tl-badge--work">Work</span>
-          <div class="tl-title">Character Technical Artist</div>
-          <ul class="tl-points">
-            <li>Defined the Gen13 Avatar Standard and USD template hierarchy (150 files) for all production avatars</li>
-            <li>Built the Rapid Companion Tool, USD Export API, and ML facial data generation pipeline</li>
-            <li>Led migration of 1,800+ legacy wearable assets to the new standard</li>
-          </ul>
-          <div class="tl-stack">Python · OpenUSD · MayaUSD · PySide2/6 · Houdini · GitHub Actions</div>
-        </div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-left">
-          <div class="tl-when">Jul 2022 – Dec 2024</div>
-          <div class="tl-where">Genies</div>
-        </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <span class="tl-badge tl-badge--work">Work</span>
-          <div class="tl-title">Character TD</div>
-          <ul class="tl-points">
-            <li>Built character rigs, wearable assets, and props for production</li>
-            <li>Developed rigging tools and pipeline automation in Maya/Python</li>
-            <li>Implemented deformation workflows using matrix transforms and skeletal hierarchies</li>
-          </ul>
-          <div class="tl-stack">Maya · Python · PySide2</div>
-        </div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-left">
-          <div class="tl-when">2020 – 2021</div>
-          <div class="tl-where">Quantic · Raptor Studios</div>
-        </div>
-        <div class="tl-dot"></div>
-        <div class="tl-right">
-          <span class="tl-badge tl-badge--work">Work</span>
-          <div class="tl-title">Rigging Artist</div>
-          <ul class="tl-points">
-            <li>Created production character rigs with control systems and deformation setups</li>
-            <li>Skinning, deformation adjustments, and collaboration with animation teams</li>
-          </ul>
-          <div class="tl-stack">Maya · Python</div>
-        </div>
-      </div>
-
-      <!-- Education (grouped) -->
-      <div class="tl-item tl-item--edu-group reveal">
-        <div class="tl-left">
-          <div class="tl-when">Training</div>
-          <div class="tl-where">Various</div>
-        </div>
-        <div class="tl-dots-col">
-        </div>
-        <div class="tl-right">
-          <span class="tl-badge tl-badge--edu">Education</span>
-          <ul class="tl-edu-list">
-            <li>
-              <div class="tl-title" style="font-size:0.88rem;">Engineering in Animation &amp; VFX</div>
-              <div class="tl-stack">Universidad Politécnica de Santa Rosa</div>
-            </li>
-            <li>
-              <div class="tl-title" style="font-size:0.88rem;">Master in Rigging for Animation &amp; Videogames</div>
-              <div class="tl-stack">Libel Academy</div>
-            </li>
-            <li>
-              <div class="tl-title" style="font-size:0.88rem;">Rigging for Character TDs</div>
-              <div class="tl-stack">Keyframe Animation School</div>
-            </li>
-            <li>
-              <div class="tl-title" style="font-size:0.88rem;">Advanced Python for TDs</div>
-              <div class="tl-stack">TD Academy</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section id="contact" style="text-align: center; max-width: 600px; margin: 0 auto;">
     <div class="reveal">
@@ -1526,9 +1431,10 @@
         Currently open to new opportunities in Technical Art and Rigging.<br />
         Whether you have a question or just want to say hi, feel free to reach out.
       </p>
-      <div style="display: flex; gap: 1rem; justify-content: center;">
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
         <a href="mailto:liz.herrera.leon@gmail.com" class="btn btn-primary">Email Me</a>
         <a href="https://linkedin.com/in/liz-herreraa" target="_blank" class="btn btn-ghost">LinkedIn</a>
+        <a href="src/LizHerrera_Resume_20206.pdf" download class="btn btn-ghost">Download Resume ↓</a>
       </div>
     </div>
   </section>
@@ -1616,31 +1522,21 @@
     <div class="modal-panel">
       <button class="modal-close" onclick="closeModal('modal-rapid')">✕ CLOSE</button>
       <div class="modal-eyebrow">02 — Pipeline Tool</div>
-      <div class="modal-title" id="modal-rapid-title">Rapid Companion Tool<br />+ USD Export API</div>
+      <div class="modal-title" id="modal-rapid-title">Maya Autorigging Tool<br />+ USD Export API</div>
       <div class="modal-stack">Python · PySide2/6 · OpenUSD · MayaUSD · GitHub Actions API</div>
 
       <div class="modal-section">
-        <div class="modal-section-label">The Challenge</div>
-        <p>Artists and TDs completing an avatar rig had to jump between 5–7 separate Maya scripts, a manual USD export
-          process, and a separate CI dashboard — all without a unified status view or validation step. Small errors at
-          the export stage often weren't caught until CI failed, wasting hours. The ask was to build a single
-          artist-facing hub that covered the entire workflow without leaving Maya.</p>
-      </div>
-
-      <div class="modal-divider"></div>
-
-      <div class="modal-section">
         <div class="modal-section-label">Architecture</div>
-        <p>I built the Rapid Companion as a PySide2/6 dockable Maya panel — a sequential tab-based workflow driving a
-          modular USD Export API underneath. Each stage (mesh load, skeleton bind, skinweights, blendshapes, proxy,
-          export, publish) is an independently-skippable module the UI calls into, so power users can bypass stages
+        <p>I built the tool as a PySide2 dockable Maya panel — a sequential workflow driving a
+          modular USD Export API underneath. Each stage (mesh load, skeleton, skinweights, blendshapes, proxy,
+          export, publish) is an independently-skippable module the UI calls into, so users can bypass stages
           while artists follow the linear flow.</p>
         <ul>
-          <li>Modular export API: each stage is a standalone Python class with validate() / run() / rollback() methods
+          <li>Modular export API: each stage is a standalone Python class with validate() / run() methods.
           </li>
-          <li>Sparse USD iteration layer system: artists push overrides onto a published base without touching source
+          <li>USD iteration layer system: artists push overrides onto a published base without touching source
             files</li>
-          <li>GitHub Actions REST API embedded — trigger CI, poll status, view logs, all from inside Maya</li>
+          <li>GitHub Actions REST API embedded — trigger CI inside Maya</li>
           <li>Real-time validation feedback with per-stage pass/warn/fail indicators in the panel UI</li>
         </ul>
       </div>
@@ -1668,17 +1564,6 @@
             <span>Export Stage Breakdown</span>
           </div>
         </div>
-      </div>
-
-      <div class="modal-divider"></div>
-
-      <div class="modal-section">
-        <div class="modal-section-label">Impact</div>
-        <ul>
-          <li>Reduced full avatar rig-to-publish time from ~2 hrs manual effort to a guided 25-min workflow</li>
-          <li>Eliminated a class of USD export errors by enforcing validation before each stage</li>
-          <li>Shipped and adopted by the full rigging and technical art team at Genies</li>
-        </ul>
       </div>
     </div>
   </div>
